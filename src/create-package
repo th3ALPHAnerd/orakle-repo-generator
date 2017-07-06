@@ -1,0 +1,14 @@
+#!/bin/bash
+
+target=./target/packages/$1
+
+name=$1
+data=""
+
+for i in $(seq 1 $2)
+do
+  data+="  PROCEDURE $name\_$i;\n"
+done
+
+touch $target
+sed -e "s/\${name}/$name/" -e "s/\${data}/$data/" src/templates/package > $target

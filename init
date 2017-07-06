@@ -1,0 +1,22 @@
+#!/bin/bash
+
+./clean
+mkdir -p target/tables
+mkdir -p target/packages
+mkdir -p target/package_bodies
+
+
+for i in $(seq 1 $1)
+do
+./src/create-table table_$i $i
+./src/create-package package_$i $i
+./src/create-package-body package_$i procedure $i
+done
+#
+# for dir in target/*
+# do
+#   for i in $(seq 1 $2)
+#   do
+#     echo "Implementing features from SUBEFFORT-$i" > $dir/file$i
+#   done
+# done

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+target=./target/tables/$1
+
+name=$1
+data=""
+
+for i in $(seq 1 $2)
+do
+  data+="  column\_$i varchar2(32)\n"
+done
+
+touch $target
+
+sed -e "s/\${name}/$name/" -e "s/\${data}/$data/" src/templates/table > $target
